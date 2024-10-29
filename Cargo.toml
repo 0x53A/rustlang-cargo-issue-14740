@@ -1,0 +1,29 @@
+cargo-features = ["edition2024"]
+
+[package]
+name = "rustato_lib"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]  # Compile this crate to a dynamic C library.
+
+[dependencies]
+
+godot               = { git = "https://github.com/0x53A/gdext", branch = "dev-multiple-impl-blocks", features = ["experimental-wasm", "lazy-function-tables"] }
+
+# doesn't work
+gdext_coroutines    = { git = "https://github.com/0x53A/gdext_coroutines", branch = "dev" }
+fe-o-godot-macros   = { git = "https://github.com/0x53A/fe-o-godot-macros", branch = "dev" }
+
+
+# works
+#gdext_coroutines    = { git = "https://github.com/0x53A/gdext_coroutines", branch = "dev-with-patched-godot-dependency" }
+#fe-o-godot-macros   = { git = "https://github.com/0x53A/fe-o-godot-macros", branch = "dev-with-patched-godot-dependency" }
+
+
+
+
+
+[patch."https://github.com/godot-rust/gdext"]
+godot               = { package = "godot", git = "https://github.com/0x53A/gdext", branch = "dev-multiple-impl-blocks" }
